@@ -1,0 +1,240 @@
+/* Layout container */
+.layout-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f3f4f6;
+  }
+
+  /* Prevent text selection on sidebar */
+.sidebar, 
+.sidebar * {
+  user-select: none; /* Disables text highlighting */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+/* Sidebar Content */
+.sidebar-content {
+    flex: 1; /* Take up all available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push nav and user card apart */
+  }
+  
+  /* Sidebar - Expanded */
+  .sidebar {
+    transition: width 0.3s ease;
+    justify-content: space-between; /* Push content to top and bottom */
+    min-height: 100vh; /* Ensure it fills the full height of the screen */
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .sidebar:active {
+    cursor: grabbing;
+  }
+  
+  /* Sidebar - Expanded */
+  .sidebar.expanded {
+    width: 15rem;
+  }
+  
+  /* Sidebar - Collapsed (Docked) */
+  .sidebar.collapsed {
+    width: 5rem; /* Docked width */
+    text-align: center;
+  }
+  
+  /* Sidebar Header */
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Sidebar Title (Hidden When Collapsed) */
+  .sidebar-title {
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar-title.hide {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+  }
+  
+  /* Navigation Links */
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.25rem;
+    gap: 1rem;
+    transition: background 0.3s ease;
+    color: theme("colors.secondary");
+  }
+  
+  .nav-item:hover {
+    background-color: theme("colors.accent");
+    color: theme("colors.secondary");
+  }
+  
+  /* Hide Text When Collapsed */
+  .sidebar.collapsed .nav-item span {
+    display: none;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Header */
+  .header {
+    background: theme("colors.background");
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Content */
+  .content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+  
+  /* Footer */
+  .footer {
+    background: theme("colors.background");
+    padding: 1rem;
+    text-align: center;
+  }
+  /* Sidebar Toggle Button */
+  .sidebar-toggle {
+    position: absolute;
+    top: 50%;
+    right: -0.1rem;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 40%;
+    padding: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+  
+  /* Adjust for collapsed mode */
+  .sidebar.collapsed .sidebar-toggle {
+    right: -15px;
+  }
+  
+  /* Hover effect */
+  .sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Sidebar Logo Container */
+.sidebar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    height: 4rem; /* Ensures logos are centered */
+  }
+  
+  /* Default Logo Styling */
+  .logo {
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    /* max-height: 40px; */
+    max-width: 100%;
+  }
+  
+  /* Wide Logo (Full Name) */
+  .wide-logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Icon Logo (Square) */
+  .icon-logo {
+    max-height: 40px;
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute; /* Keeps both logos in the same position */
+  }
+  
+  /* When Sidebar is Collapsed */
+  .sidebar.collapsed .wide-logo {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  .sidebar.collapsed .icon-logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* User Card */
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: theme("colors.secondary");
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  
+  .user-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  .current-ticket {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .time-tracking {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  /* Handle Collapsed Sidebar */
+  .sidebar.collapsed .user-info {
+    display: none; /* Hide details in collapsed mode */
+  }
+  
+  .sidebar.collapsed .user-card {
+    justify-content: center; /* Center the avatar in collapsed mode */
+  }
