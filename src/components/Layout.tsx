@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { FiHome, FiClipboard, FiBarChart2, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiHome, FiClipboard, FiBarChart2, FiChevronLeft, FiChevronRight, FiUser } from "react-icons/fi";
 import logoWide from "./../assets/logo/IOS_Wide_Logo.png";
 import logoSquare from "./../assets/logo/IOS_Square_Logo.png";
 import profilePhoto from "./../assets/images/icons/User_Profile.jpg";
 
 import "./Layout.css";
+import { useAuth } from "../context/AuthContext";
 
 const Layout: React.FC = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const sidebarRef = useRef<HTMLDivElement | null>(null);
+  const { logout } = useAuth();
   let touchStartX = 0;
   let mouseStartX = 0;
   let isDragging = false;
@@ -89,9 +91,15 @@ const Layout: React.FC = () => {
             <nav>
             <ul>
                 <li>
-                <Link to="/" className="nav-item">
+                <Link to="/home" className="nav-item">
                     <FiHome size={24} />
                     {isSidebarOpen && <span>Dashboard</span>}
+                </Link>
+                </li>
+                <li>
+                <Link to="/users" className="nav-item">
+                    <FiUser size={24} />
+                    {isSidebarOpen && <span>Users</span>}
                 </Link>
                 </li>
                 <li>
@@ -110,19 +118,22 @@ const Layout: React.FC = () => {
             </nav>
             {/* User Card */}
             <div className="user-card">
-                <img
-                src={profilePhoto}
-                alt="User Profile"
-                className="user-avatar"
-                />
-                {isSidebarOpen && (
-                <div className="user-info">
-                    <p className="user-name">John Doe</p>
-                    <p className="current-ticket">Ticket #12345</p>
-                    <p className="time-tracking">Elapsed: 00:25:12</p>
+                    <img
+                        src={profilePhoto}
+                        alt="User Profile"
+                        className="user-avatar"
+                    />
+                    {isSidebarOpen && (
+                        <div className="user-info">
+                            <p className="user-name">John Doe</p>
+                            <p className="current-ticket">Ticket #12345</p>
+                            <p className="time-tracking">Elapsed: 00:25:12</p>
+                            <button className="mt-2 bg-red-500 px-4 py-2 rounded" onClick={logout}>
+                                Logout
+                            </button>
+                        </div>
+                    )}
                 </div>
-                )}
-            </div>
         </div>
 
         {/* Toggle Button on Sidebar Edge */}
